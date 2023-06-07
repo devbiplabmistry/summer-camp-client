@@ -4,7 +4,7 @@ import { FaUserAlt } from 'react-icons/fa';
 const NavBar = () => {
  const   user =true
     const menu = <>
-        <li> <Link>Home</Link> </li>
+        <li> <Link to="/">Home</Link> </li>
         <li> <Link>instructor</Link> </li>
         <li> <Link>classes</Link> </li>
        {user &&  <li> <Link>Dashboard </Link> </li>}
@@ -30,8 +30,7 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
              {
-                user ?  <Link to="/login"> <FaUserAlt></FaUserAlt> </Link> :   <a className="btn">Login</a>
-    
+                user ?  <Link to="/login"> <FaUserAlt></FaUserAlt> </Link> : <Link className="btn">Login</Link>
              }
             </div>
         </div>
