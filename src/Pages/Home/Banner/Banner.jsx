@@ -1,36 +1,30 @@
 import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+import banner1 from "../../../assets/banner/banner1.jpg"
+import banner3 from "../../../assets/banner/banner3.jpg"
+import banner4 from "../../../assets/banner/banner4.jpg"
+import banner5 from "../../../assets/banner/banner5.jpg"
+
 
 
 const Banner = () => {
     return (
-        <div>
-            <Carousel showArrows={true} onChange={onChange} onClickItem={onClickItem} onClickThumb={onClickThumb}>
-                <div>
-                    <img src="assets/1.jpeg" />
-                    <p className="legend">Legend 1</p>
-                </div>
-                <div>
-                    <img src="assets/2.jpeg" />
-                    <p className="legend">Legend 2</p>
-                </div>
-                <div>
-                    <img src="assets/3.jpeg" />
-                    <p className="legend">Legend 3</p>
-                </div>
-                <div>
-                    <img src="assets/4.jpeg" />
-                    <p className="legend">Legend 4</p>
-                </div>
-                <div>
-                    <img src="assets/5.jpeg" />
-                    <p className="legend">Legend 5</p>
-                </div>
-                <div>
-                    <img src="assets/6.jpeg" />
-                    <p className="legend">Legend 6</p>
-                </div>
-            </Carousel>
-        </div>
+        <Carousel>
+            <div>
+                <img src={banner1} />
+            </div>
+            <div>
+                <img src={banner3} />
+            </div>
+            <div>
+                <img src={banner4} />
+            </div>
+            <div>
+                <img src={banner5} />
+            </div>
+
+        </Carousel>
     );
 };
 
