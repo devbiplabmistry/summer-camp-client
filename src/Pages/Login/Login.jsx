@@ -1,12 +1,26 @@
-import { useState } from 'react';
-import { AiFillEyeInvisible,AiFillEye } from 'react-icons/ai';
+import { useContext, useState } from 'react';
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 import { BsGoogle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import { AuthContext } from '../../Providers/AuthProvider';
 const Login = () => {
-    const { register,handleSubmit, reset, formState: { errors } } = useForm();
-    const [showPass,setShowPass]=useState(false)
-    const onSubmit = data => console.log(data);
+const {signIn} =useContext(AuthContext)
+console.log(signIn);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const [showPass, setShowPass] = useState(false)
+    const onSubmit = data =>{
+        const {email,password} =data;
+        signIn(email,password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user);
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            console.log(errorMessage);
+          });
+    };
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col">
@@ -14,7 +28,7 @@ const Login = () => {
                     <h1 className="text-5xl font-bold">Login now!</h1>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <form  onSubmit={handleSubmit(onSubmit)} className="card-body">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -26,11 +40,11 @@ const Login = () => {
                                 <span className="label-text">Password</span>
                             </label>
                             <input type={showPass ? 'text' : 'password'} {...register("password")} placeholder="password" className="input input-bordered" />
-                           <div className='absolute top-[176px] right-[40px]'>
-                            {
-                                showPass ?  <AiFillEyeInvisible onClick={()=>setShowPass(false)}></AiFillEyeInvisible> :   <AiFillEye onClick={()=>setShowPass(true)}></AiFillEye>
-                            } 
-                           </div>
+                            <div className='absolute top-[176px] right-[40px]'>
+                                {
+                                    showPass ? <AiFillEyeInvisible onClick={() => setShowPass(false)}></AiFillEyeInvisible> : <AiFillEye onClick={() => setShowPass(true)}></AiFillEye>
+                                }
+                            </div>
                         </div>
                         <div className="form-control mt-6">
                             <button type='submit' className="btn btn-primary">Login</button>
