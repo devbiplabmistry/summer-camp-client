@@ -1,25 +1,35 @@
 import { useContext, useState } from 'react';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 import { BsGoogle } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Providers/AuthProvider';
+import Swal from 'sweetalert2';
 const Login = () => {
-const {signIn} =useContext(AuthContext)
-console.log(signIn);
+    const { signIn } = useContext(AuthContext)
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPass, setShowPass] = useState(false)
-    const onSubmit = data =>{
-        const {email,password} =data;
-        signIn(email,password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
-          })
-          .catch((error) => {
-            const errorMessage = error.message;
-            console.log(errorMessage);
-          });
+    const navigate =useNavigate()
+    const onSubmit = data => {
+        const { email, password } = data;
+        signIn(email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                reset()
+                {
+                    user &&
+                    Swal.fire(
+                        'Great!',
+                        'you Sign In Sucessfully!',
+                        'success'
+                    )
+                }
+                navigate("/")
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
     };
     return (
         <div className="hero min-h-screen bg-base-200">

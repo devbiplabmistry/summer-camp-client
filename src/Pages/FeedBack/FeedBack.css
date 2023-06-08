@@ -1,0 +1,9 @@
+.FeedBack{
+    background: url('../../assets/others/background.jpg');
+    padding-top: 350px;
+    padding-bottom: 350px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}

@@ -1,18 +1,42 @@
 import { BsGoogle } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form";
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../Providers/AuthProvider';
+import Swal from 'sweetalert2';
 const Register = () => {
+    const { signUp, updateUserProfile } = useContext(AuthContext);
     const [cPass, setCPass] = useState("")
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
+        const { email, password, name, photo } = data;
         if (data.password != data.confirmPassword) {
-          return  setCPass('Your password is not match')
+            return setCPass('Your password is not match')
         }
+        signUp(email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                updateUserProfile(name, photo)
+                    .then(() => {
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
 
-        console.log(data)
+                reset()
+                if (user) {
+                    Swal.fire(
+                        'Great !!',
+                        'You sucessfully Register',
+                        'success'
+                    )
+                }
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                console.log(errorMessage);
+            });
     }
-        ;
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -40,24 +64,29 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" {...register("password", { required: true, min: 6, max: 20 ,pattern: /^(?=.*[A-Z])(?=.*[^a-zA-Z0-9])$/ })} placeholder="password" className="input input-bordered" />
-                            {errors.email && <span>This field is required</span>}
-                            {errors.email && <span>Password length can not be less than 6 </span>}
-                            {errors.email && <span>password must be one uppercase and one special charecter</span>}
+                            <input type="password" {...register("password", {
+                                required: true,
+                                pattern: {
+                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                                    message: 'Password must contain at least 8 characters including one uppercase letter, one lowercase letter, and one digit',
+                                },
+                            })}
+                                placeholder="password" className="input input-bordered" />
+                            {errors.password && <p>{errors.password.message}</p>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Confirm Password</span>
                             </label>
                             <input type="Password" {...register("confirmPassword")} placeholder="Confirm password" className="input input-bordered" />
-                       <p className='text-red-400 text-base fon-[roboto]'><small>{cPass}</small></p>
+                            <p className='text-red-400 text-base fon-[roboto]'><small>{cPass}</small></p>
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Photo URL</span>
                             </label>
                             <input type="photo" {...register("photo", { required: true })} placeholder="password" className="input input-bordered" />
-                            {errors.email && <span>This field is required</span>}
+                            {errors.photo && <span>This field is required</span>}
                         </div>
                         <div className="form-control mt-6">
                             <button type='submit' className="btn btn-primary">Sign Up</button>
