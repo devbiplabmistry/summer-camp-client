@@ -1,16 +1,16 @@
-import FeedBack from "../../FeedBack/FeedBack";
-import PopularClass from "../../PopularClass/PopularClass";
+
 import Banner from "../Banner/Banner";
-import Instructor from "../Instructor/Instructor";
+import FeedBack from "../FeedBack/FeedBack";
+import PopularInstructor from "../Instructor/PopularInstructor";
+import PopularClass from "../PopularClass/PopularClass";
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
             <PopularClass></PopularClass>
-            <Instructor></Instructor>
-            <FeedBack></FeedBack>
-  
+            <PopularInstructor></PopularInstructor>
+           <FeedBack></FeedBack>
         </div>
     );
 };

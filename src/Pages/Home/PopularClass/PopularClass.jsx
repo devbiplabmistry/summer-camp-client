@@ -1,6 +1,6 @@
-import Card from "../../Components/card";
-import useclasses from "../../Hooks/useClasses";
 
+import Card from "../../../Components/Card";
+import useclasses from "../../../Hooks/useClasses";
 const PopularClass = () => {
     const danceclass = useclasses()
     const popularClass = danceclass.filter(item => item.numberOfStudents > 15)

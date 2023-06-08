@@ -1,10 +1,8 @@
 import './FeedBack.css';
 import { Rating } from '@smastrom/react-rating'
-
 import '@smastrom/react-rating/style.css'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,7 +12,7 @@ import { Pagination, Navigation } from "swiper";
 const FeedBack = () => {
     return (
         <>
-        <h1 className='font-[roboto] text-4xl text-center text-orange-600 font-bold uppercase my-10'>What people say about us :</h1>
+            <h1 className='font-[roboto] text-4xl text-center text-orange-600 font-bold uppercase my-10'>What people say about us :</h1>
             <div className="FeedBack">
                 <Swiper
                     navigation={true}

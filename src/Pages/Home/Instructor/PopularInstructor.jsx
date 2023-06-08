@@ -1,12 +1,12 @@
 import useInstructor from "../../../Hooks/useInstructor";
 
-const Instructor = () => {
+const PopularInstructor = () => {
     const instructor = useInstructor()
     const popular = instructor.filter(item => item.classesTaken >= 30)
     console.log("instructor ", popular);
     return (
         <div>
-            <h1 className="font-[roboto] font-bold text-orange-600 uppercase text-lg text-center my-24">this is our popular instructor</h1>
+            <h1 className="font-[roboto] font-bold text-orange-600 uppercase text-2xl text-center mt-24 mb-4">this is our popular instructor</h1>
             <div className="grid grid-cols-3 gap-4">
                 {
                     popular.map(item =>
@@ -27,4 +27,4 @@ const Instructor = () => {
     );
 };
 
-export default Instructor;
+export default PopularInstructor;
