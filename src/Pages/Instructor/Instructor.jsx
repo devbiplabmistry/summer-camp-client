@@ -1,12 +1,10 @@
-import useInstructor from "../../../Hooks/useInstructor";
 
-const PopularInstructor = () => {
-    const instructor = useInstructor()
-    const popular = instructor.filter(item => item.classesTaken >= 30)
-    console.log("instructor ", popular);
+import useInstructor from "../../Hooks/useInstructor";
+const Instructor = () => {
+    const instructor = useInstructor();
     return (
-        <div>
-            <h1 className="font-[roboto] font-bold text-orange-600 uppercase text-2xl text-center mt-24 mb-4">this is our popular instructor</h1>
+        <div className="my-20">
+            <h1 className="font-[roboto] font-bold text-3xl text-orange-500 text-center uppercase ">All instructor are  Here</h1>
             <div className="grid grid-cols-3 gap-4">
                 {
                     instructor.map(item => <div key={item._id} className="card w-96 bg-base-100 shadow-xl">
@@ -26,4 +24,4 @@ const PopularInstructor = () => {
     );
 };
 
-export default PopularInstructor;
+export default Instructor;

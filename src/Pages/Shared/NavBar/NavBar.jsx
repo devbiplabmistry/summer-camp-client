@@ -5,8 +5,8 @@ const NavBar = () => {
  const   user =true
     const menu = <>
         <li> <Link to="/">Home</Link> </li>
-        <li> <Link>instructor</Link> </li>
-        <li> <Link>classes</Link> </li>
+        <li> <Link to="/instructor">instructor</Link> </li>
+        <li> <Link to="/classes">classes</Link> </li>
        {user &&  <li> <Link>Dashboard </Link> </li>}
     </>
 
