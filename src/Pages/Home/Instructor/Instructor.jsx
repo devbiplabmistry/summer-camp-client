@@ -6,7 +6,7 @@ const Instructor = () => {
     console.log("instructor ", popular);
     return (
         <div>
-            <h1>instructor</h1>
+            <h1 className="font-[roboto] font-bold text-orange-600 uppercase text-lg text-center">this is our popular instructor</h1>
             <div className="grid grid-cols-3 gap-4">
                 {
                     popular.map(item =>
