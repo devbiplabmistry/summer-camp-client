@@ -9,7 +9,7 @@ const PopularInstructor = () => {
             <h1 className="font-[roboto] font-bold text-orange-600 uppercase text-2xl text-center mt-24 mb-4">this is our popular instructor</h1>
             <div className="grid grid-cols-3 gap-4">
                 {
-                    instructor.map(item => <div key={item._id} className="card w-96 bg-base-100 shadow-xl">
+                    popular.map(item => <div key={item._id} className="card w-96 bg-base-100 shadow-xl">
                         <figure className="px-10 pt-10">
                             <img src={item.image} alt="Shoes" className="rounded-xl w-[300px] h-[300px]" />
                         </figure>
