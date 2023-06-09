@@ -8,7 +8,7 @@ const NavBar = () => {
         <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/">Home</Link> </li>
         <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/instructor">instructor</Link> </li>
         <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/classes">classes</Link> </li>
-       {user &&  <li className="font-[roboto] font-bold text-black text-xl "> <Link>Dashboard </Link> </li>}
+       {user &&  <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/dashboard">Dashboard </Link> </li>}
     </>
 
     return (

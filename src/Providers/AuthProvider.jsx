@@ -28,6 +28,13 @@ const AuthProvider = ({ children }) => {
     }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
+            fetch('http://localhost:5000/jwt',{
+                method:'POST'
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                localStorage.setItem('access-token',data.token)
+            })
             setUser(user)
             setLoading(false)
         }  
