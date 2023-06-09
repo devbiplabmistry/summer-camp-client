@@ -2,8 +2,6 @@ import { Link, Outlet } from "react-router-dom";
 import Footer from "../Pages/Shared/Footer/Footer";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-import SelectedClass from "../Pages/DashBoard/SelectedClass/SelectedClass";
-
 
 const DashBoard = () => {
     const { user } = useContext(AuthContext)
@@ -15,20 +13,20 @@ const DashBoard = () => {
         <>
             {isStudent &&
                 <div className="flex">
-                    <li><Link to="/dashboard/selectedClasses">My Selected Classes</Link></li>
-                    <li><Link>My Enrolled Classes</Link></li>
+                    <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/selectedClasses">My Selected Classes</Link></li>
+                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Enrolled Classes</Link></li>
                 </div>
             }
             {isInstructor &&
                 <div className="flex">
-                    <li><Link>My Selected Classes</Link></li>
-                    <li><Link>My Enrolled Classes</Link></li>
+                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Selected Classes</Link></li>
+                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Enrolled Classes</Link></li>
                 </div>
             }
             {isAdmin &&
                 <div className="flex">
-                    <li><Link>My Selected Classes</Link></li>
-                    <li><Link>My Enrolled Classes</Link></li>
+                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Selected Classes</Link></li>
+                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Enrolled Classes</Link></li>
                 </div>
             }
         </>
