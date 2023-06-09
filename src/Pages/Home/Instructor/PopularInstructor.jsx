@@ -3,7 +3,7 @@ import useInstructor from "../../../Hooks/useInstructor";
 const PopularInstructor = () => {
     const instructor = useInstructor()
     const popular = instructor.filter(item => item.classesTaken >= 30)
-    console.log("instructor ", popular);
+    // console.log("instructor ", popular);
     return (
         <div>
             <h1 className="font-[roboto] font-bold text-orange-600 uppercase text-2xl text-center mt-24 mb-4">this is our popular instructor</h1>

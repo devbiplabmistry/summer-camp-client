@@ -9,7 +9,6 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
 
-
     const signUp = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password);
@@ -22,20 +21,19 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return signOut(auth);
     }
-    const updateUserProfile =(userName,photo)=>{
+    const updateUserProfile = (userName, photo) => {
         return updateProfile(auth.currentUser, {
             displayName: `${userName}`, photoURL: `${photo}`
-          })
+        })
     }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
             setUser(user)
-        }
-        else {
+            setLoading(false)
+        }  
             return () => {
-                unsubscribe()
+                return unsubscribe()
             }
-        }
     });
 
 
@@ -45,7 +43,7 @@ const AuthProvider = ({ children }) => {
         logOut,
         user,
         loading,
-        updateUserProfile
+        updateUserProfile,
     }
 
     return (

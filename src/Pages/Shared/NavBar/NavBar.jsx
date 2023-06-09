@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-import { FaUserAlt } from 'react-icons/fa';
+import { useContext } from "react";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const NavBar = () => {
- const   user =true
+ const {user} =useContext(AuthContext)
     const menu = <>
-        <li> <Link to="/">Home</Link> </li>
-        <li> <Link to="/instructor">instructor</Link> </li>
-        <li> <Link to="/classes">classes</Link> </li>
-       {user &&  <li> <Link>Dashboard </Link> </li>}
+        <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/">Home</Link> </li>
+        <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/instructor">instructor</Link> </li>
+        <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/classes">classes</Link> </li>
+       {user &&  <li className="font-[roboto] font-bold text-black text-xl "> <Link>Dashboard </Link> </li>}
     </>
 
     return (
@@ -30,7 +31,7 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
              {
-                user ?  <Link to="/login"> <FaUserAlt></FaUserAlt> </Link> : <Link className="btn">Login</Link>
+                user ? <img className="w-10 h-10 rounded-full" src={user.photoURL} alt="photo" />  : <Link to="/login" className="btn">Login</Link>
              }
             </div>
         </div>

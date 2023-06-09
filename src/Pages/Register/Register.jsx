@@ -1,10 +1,11 @@
 import { BsGoogle } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 const Register = () => {
+    const navigate =useNavigate()
     const { signUp, updateUserProfile } = useContext(AuthContext);
     const [cPass, setCPass] = useState("")
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -16,26 +17,28 @@ const Register = () => {
         signUp(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                console.log(user);
                 updateUserProfile(name, photo)
                     .then(() => {
+                        reset ()
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'You sucessfully registered !!!',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
                     })
                     .catch((error) => {
-                        console.log(error);
-                    });
+                        console.log(error)
+                    })
 
-                reset()
-                if (user) {
-                    Swal.fire(
-                        'Great !!',
-                        'You sucessfully Register',
-                        'success'
-                    )
-                }
             })
             .catch((error) => {
                 const errorMessage = error.message;
                 console.log(errorMessage);
             });
+            navigate("/")
     }
 
     return (

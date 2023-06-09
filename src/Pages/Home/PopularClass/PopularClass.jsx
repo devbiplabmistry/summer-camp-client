@@ -4,7 +4,7 @@ import useclasses from "../../../Hooks/useClasses";
 const PopularClass = () => {
     const danceclass = useclasses()
     const popularClass = danceclass.filter(item => item.numberOfStudents > 15)
-    console.log(popularClass);
+    // console.log(popularClass);
     return (
         < >
         <h2 className="font-[roboto] font-bold text-2xl text-center uppercase my-8 ">popular dance classes</h2>
