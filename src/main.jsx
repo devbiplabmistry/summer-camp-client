@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import router from './Routes/Router';
 import AuthProvider from './Providers/AuthProvider';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ToastContainer } from 'react-toastify';
 const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -14,6 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
       <div className='container mx-auto'>
         <RouterProvider router={router} />
+        <ToastContainer />
       </div>
     </QueryClientProvider>
     </AuthProvider>
