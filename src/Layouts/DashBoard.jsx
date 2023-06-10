@@ -5,8 +5,8 @@ import { AuthContext } from "../Providers/AuthProvider";
 
 const DashBoard = () => {
     const { user } = useContext(AuthContext)
-    const isStudent = true;
-    const isInstructor = false;
+    const isStudent = false;
+    const isInstructor = true;
     const isAdmin = false;
 
     const menu =
@@ -19,14 +19,14 @@ const DashBoard = () => {
             }
             {isInstructor &&
                 <div className="flex">
-                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Selected Classes</Link></li>
-                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Enrolled Classes</Link></li>
+                    <li  className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/dashboard/addaclass" >Add a Class</Link></li>
+                    <li  className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link>My Classes</Link></li>
                 </div>
             }
             {isAdmin &&
                 <div className="flex">
-                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Selected Classes</Link></li>
-                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Enrolled Classes</Link></li>
+                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/manageClass">Manage Classes</Link></li>
+                    <li  className="font-[roboto] font-semibold text-lg text-orange-500"><Link>Manage Users</Link></li>
                 </div>
             }
         </>
