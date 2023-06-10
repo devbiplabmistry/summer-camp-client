@@ -3,7 +3,7 @@ import { AuthContext } from "../Providers/AuthProvider";
 
 import Swal from "sweetalert2";
 
-const Card = ({ item }) => {
+const Card = ({ item, }) => {
     const { image, title, availableSeats, instructor, _id, description } = item;
     const { user } = useContext(AuthContext);
     const handleJoin = (item) => {
@@ -11,8 +11,8 @@ const Card = ({ item }) => {
             alert('Please login before join the course !!')
         }
         const { image, title, availableSeats, instructor, _id, description } = item;
-        const selectedClass = {_id,image, title, availableSeats, instructor, description}
-        fetch(`http://localhost:5000/selectedClasses/${user.email}`, {
+        const selectedClass = { selectedClassId: _id, email: user.email, image, title, availableSeats, instructor, description }
+        fetch(`http://localhost:5000/selectedClasses/${_id}`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -21,7 +21,8 @@ const Card = ({ item }) => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data) {
+                console.log(data);
+                if (data.email) {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -63,7 +64,7 @@ const Card = ({ item }) => {
                             }
                         </div>
 
-                    </div>
+                    </div >
             }
         </>
     );

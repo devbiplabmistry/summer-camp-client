@@ -19,7 +19,8 @@ const Register = () => {
                 const user = userCredential.user;
                 console.log(user);
                 updateUserProfile(name, photo)
-                    .then(() => {
+                    .then((data) => {
+                        console.log(data);
                         reset ()
                         Swal.fire({
                             position: 'top-end',

@@ -10,7 +10,7 @@ const {user,loading} =useContext(AuthContext)
         queryKey: ['selectedClass'],
         enabled:!loading,
         queryFn: async () => {
-            const res = await axiosSecure.get('/selectedClasses');
+            const res = await axiosSecure.get(`/selectedClasses/?email=${user.email}`);
             return res.data;
         }
     })

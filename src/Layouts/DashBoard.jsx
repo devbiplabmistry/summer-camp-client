@@ -50,7 +50,7 @@ const DashBoard = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <img className="w-20 h-20 rounded-full" src={user?.photoURL} alt="img" />
+                   <Link to="/"> <img className="w-20 h-20 rounded-full" src={user?.photoURL} alt="img" /></Link>
                 </div>
             </div>
             <Outlet></Outlet>

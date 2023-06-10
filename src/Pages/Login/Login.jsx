@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 const Login = () => {
-    const { signIn } = useContext(AuthContext)
+    const { signIn,user } = useContext(AuthContext)
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPass, setShowPass] = useState(false)
     const navigate =useNavigate()
@@ -18,11 +18,13 @@ const Login = () => {
                 reset()
                 {
                     user &&
-                    Swal.fire(
-                        'Great!',
-                        'you Sign In Sucessfully!',
-                        'success'
-                    )
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `Hi ${user.displayName} Welcome Here!!!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
                 }
                 navigate("/")
             })

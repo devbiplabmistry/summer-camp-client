@@ -1,13 +1,28 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
- const {user} =useContext(AuthContext)
+ const {user,logOut} =useContext(AuthContext)
+ const handleLogout =()=>{
+    logOut()
+    .then(() => { 
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'You sucessfully SignOut !!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+    })
+    .catch(error => console.log(error));
+ }
     const menu = <>
         <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/">Home</Link> </li>
         <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/instructor">instructor</Link> </li>
         <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/classes">classes</Link> </li>
+        <button onClick={handleLogout} className="btn btn-secondary">logOut</button>
        {user &&  <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/dashboard">Dashboard </Link> </li>}
     </>
 
