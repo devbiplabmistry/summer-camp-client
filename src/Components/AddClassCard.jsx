@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import useMyClass from '../Hooks/useMyClass';
 
 
 const AddClassCard = ({ item, admin }) => {
-    const [,refetch] =useMyClass()
+    const [isDisabled, setIsdisabled] = useState(false)
+    const [, refetch] = useMyClass()
     const handleApproved = (id) => {
+        event.target.disabled = true;
+        {
+        if(event.target.disabled==true){
+            setIsdisabled(true)
+        }
+        }
         // console.log(id);
         fetch(`http://localhost:5000/instructor/addClass/${id}`, {
             method: 'PATCH'
@@ -13,14 +20,14 @@ const AddClassCard = ({ item, admin }) => {
             .then(res => res.json())
             .then(data => {
                 refetch()
-                if(data.modifiedCount){
+                if (data.modifiedCount) {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
                         title: 'yes Approved !!!',
                         showConfirmButton: false,
                         timer: 1500
-                      })
+                    })
                 }
             })
     }
@@ -40,14 +47,14 @@ const AddClassCard = ({ item, admin }) => {
                     <div className=" flex gap-4 justify-center items-center">
                         {admin ?
                             <div className='flex  gap-4'>
-                                <button onClick={() => handleApproved(item._id)} className="btn btn-secondary  btn-sm ">Approved</button>
-                                <button className="btn btn-secondary  btn-sm ">Deny</button>
-                                <button className="btn btn-secondary  btn-sm ">Feedback</button>
+                                <button onClick={() => handleApproved(item._id)} className="btn btn-secondary  btn-sm " disabled={isDisabled}>Approved</button>
+                                <button className="btn btn-secondary  btn-sm " disabled={isDisabled} >Deny</button>
+                                <button className="btn btn-secondary  btn-sm "  >Feedback</button>
                             </div>
                             :
                             <>
                                 <button className="btn btn-secondary  btn-sm ">update</button>
-                                <button className="btn btn-secondary  btn-sm ">Feedback</button>
+                                <button className="btn btn-secondary  btn-sm " disabled>Feedback</button>
                             </>
                         }
                     </div>
