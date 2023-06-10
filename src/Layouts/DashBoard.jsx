@@ -20,7 +20,7 @@ const DashBoard = () => {
             {isInstructor &&
                 <div className="flex">
                     <li  className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/dashboard/addaclass" >Add a Class</Link></li>
-                    <li  className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link>My Classes</Link></li>
+                    <li  className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/dashboard/myClass">My Classes</Link></li>
                 </div>
             }
             {isAdmin &&
