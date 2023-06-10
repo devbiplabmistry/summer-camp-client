@@ -26,7 +26,7 @@ const Card = ({ item, }) => {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'You selected one !!',
+                        title: `${title} has been added sucessfully`,
                         showConfirmButton: false,
                         timer: 1500
                     })

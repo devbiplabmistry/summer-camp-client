@@ -7,7 +7,7 @@ const SelectedClass = () => {
     return (
         <div className='grid grid-cols-3 gap-3'>
             {
-                selectClass.map(item => <SelectCard key={item._id} item={item}></SelectCard> )
+                selectClass[0].map(item => <SelectCard key={item._id} item={item}></SelectCard> )
 
             }
         </div>

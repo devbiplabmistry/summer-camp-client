@@ -14,6 +14,6 @@ const {user,loading} =useContext(AuthContext)
             return res.data;
         }
     })
-    return selectClasses;
+    return [selectClasses,refetch];
 }
 export default useSelectedClass;

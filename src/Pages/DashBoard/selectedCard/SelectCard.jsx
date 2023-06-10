@@ -1,7 +1,8 @@
 import Swal from "sweetalert2";
+import useSelectedClass from "../../../Hooks/useSelectedClass";
 
 const SelectCard = (item) => {
-    console.log(item);
+    const [,refetch] =useSelectedClass()
     const handleDelete = (id) => {
         fetch(`http://localhost:5000/selectedClasses/${id}`,{
             method:'DELETE'
@@ -12,11 +13,12 @@ const SelectCard = (item) => {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: `${item.title} has been deleted sucessfully !!`,
+                    title: `${item.item.title} has been deleted sucessfully !!`,
                     showConfirmButton: false,
                     timer: 1500
                   })
             }
+            refetch()
         })
     
     }
