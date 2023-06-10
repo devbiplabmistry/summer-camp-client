@@ -1,7 +1,29 @@
 import React from 'react';
+import Swal from 'sweetalert2';
+import useMyClass from '../Hooks/useMyClass';
 
 
 const AddClassCard = ({ item, admin }) => {
+    const [,refetch] =useMyClass()
+    const handleApproved = (id) => {
+        // console.log(id);
+        fetch(`http://localhost:5000/instructor/addClass/${id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                refetch()
+                if(data.modifiedCount){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'yes Approved !!!',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                }
+            })
+    }
 
     return (
         <div>
@@ -18,7 +40,7 @@ const AddClassCard = ({ item, admin }) => {
                     <div className=" flex gap-4 justify-center items-center">
                         {admin ?
                             <div className='flex  gap-4'>
-                                <button className="btn btn-secondary  btn-sm ">Approve</button>
+                                <button onClick={() => handleApproved(item._id)} className="btn btn-secondary  btn-sm ">Approved</button>
                                 <button className="btn btn-secondary  btn-sm ">Deny</button>
                                 <button className="btn btn-secondary  btn-sm ">Feedback</button>
                             </div>
