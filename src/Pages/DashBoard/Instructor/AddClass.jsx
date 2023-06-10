@@ -14,6 +14,7 @@ const AddClass = () => {
             price:data.price,
             availableSeats:data.availableSeats,
             image:data.image,
+            totalEnroll :0,
             status:"pending"
         }
         fetch('http://localhost:5000/instructor/addClass',{
