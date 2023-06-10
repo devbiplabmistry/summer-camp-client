@@ -31,6 +31,33 @@ const AddClassCard = ({ item, admin }) => {
                 }
             })
     }
+    const handleDeny = (id) => {
+        // const [isDisabled, setIsdisabled] = useState(false)
+        event.target.disabled = true;
+        {
+        if(event.target.disabled==true){
+            setIsdisabled(true)
+        }
+        }
+        // console.log(id);
+        fetch(`http://localhost:5000/instructor/addClass/deny/${id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                refetch()
+                if (data.modifiedCount) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'This class is Denied !!!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+    }
+
 
     return (
         <div>
@@ -48,7 +75,7 @@ const AddClassCard = ({ item, admin }) => {
                         {admin ?
                             <div className='flex  gap-4'>
                                 <button onClick={() => handleApproved(item._id)} className="btn btn-secondary  btn-sm " disabled={isDisabled}>Approved</button>
-                                <button className="btn btn-secondary  btn-sm " disabled={isDisabled} >Deny</button>
+                                <button onClick={()=>handleDeny(item._id)} className="btn btn-secondary  btn-sm "  >Deny</button>
                                 <button className="btn btn-secondary  btn-sm "  >Feedback</button>
                             </div>
                             :
