@@ -1,8 +1,9 @@
 import AddClassCard from "../../../Components/AddClassCard";
 import useMyClass from "../../../Hooks/useMyClass";
 
+
 const MyClasses = () => {
-    const [addClass, refetch] = useMyClass()
+    const [addClass] = useMyClass()
     console.log(addClass);
 
     return (

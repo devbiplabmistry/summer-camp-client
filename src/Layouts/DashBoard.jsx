@@ -7,7 +7,9 @@ import useInstruct from "../Hooks/useInstruct";
 import useStudent from "../Hooks/useStudent";
 
 
+
 const DashBoard = () => {
+   
     const { user } = useContext(AuthContext)
     // console.log(user);
 //   const isStudent=false

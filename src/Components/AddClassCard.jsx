@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import Swal from 'sweetalert2';
 import useMyClass from '../Hooks/useMyClass';
+import { Link } from 'react-router-dom';
 
 
 const AddClassCard = ({ item, admin }) => {
-    const [isDisabled, setIsdisabled] = useState(false)
-    const [feedback,setFeedBack]=useState("")
-    console.log(feedback);
+    // console.log(item);
     const [, refetch] = useMyClass()
+    // const [feedback,setFeedBack]=useState("")
+    const [isDisabled, setIsdisabled] = useState(false)
+    // console.log(feedback);
     const handleApproved = (id) => {
         event.target.disabled = true;
         {
@@ -21,8 +23,8 @@ const AddClassCard = ({ item, admin }) => {
         })
             .then(res => res.json())
             .then(data => {
-                refetch()
                 if (data.modifiedCount) {
+                    refetch()
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -30,6 +32,7 @@ const AddClassCard = ({ item, admin }) => {
                         showConfirmButton: false,
                         timer: 1500
                     })
+                  
                 }
             })
     }
@@ -45,9 +48,9 @@ const AddClassCard = ({ item, admin }) => {
             method: 'PATCH'
         })
             .then(res => res.json())
-            .then(data => {
-                refetch()
+            .then(data => {       
                 if (data.modifiedCount) {
+                    refetch()   
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -75,7 +78,7 @@ const AddClassCard = ({ item, admin }) => {
                             <div className='flex  gap-4'>
                                 <button onClick={() => handleApproved(item._id)} className="btn btn-secondary  btn-sm " disabled={isDisabled}>Approved</button>
                                 <button onClick={()=>handleDeny(item._id)} className="btn btn-secondary  btn-sm "  >Deny</button>
-                                <button className="btn btn-secondary  btn-sm "   >Feedback</button>
+                              <Link to="/dashboard/feedback"><button  className="btn btn-secondary  btn-sm ">Feedback</button></Link>
                             </div>
                             :
                             <>

@@ -1,9 +1,11 @@
-import axios from 'axios';
+
 import  { useContext,  } from 'react';
 import {  useQuery } from 'react-query';
 import { AuthContext } from '../Providers/AuthProvider';
+import useAxiosSecure from './useAxiosSecure';
 
 const useAdmin = () => {
+    const [axios]=useAxiosSecure()
     const {user} = useContext(AuthContext);
     const { data: admin = [], refetch } = useQuery({
         queryKey: ['admin', user?.email],

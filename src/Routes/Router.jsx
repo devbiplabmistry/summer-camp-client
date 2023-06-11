@@ -11,6 +11,7 @@ import AddClass from "../Pages/DashBoard/Instructor/AddClass";
 import MyClasses from "../Pages/DashBoard/Instructor/MyClasses";
 import ManageClass from "../Pages/DashBoard/Admin/ManageClass";
 import ManageUsers from "../Pages/DashBoard/Admin/ManageUsers";
+import FeedBack from "../Pages/DashBoard/FeedBack/FeedBack";
 
 
 const router = createBrowserRouter([
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/manageUsers",
                 element: <ManageUsers></ManageUsers>
+            },
+            {
+                path: "/dashboard/feedback",
+                element: <FeedBack></FeedBack>
             }
         ]
     }

@@ -2,13 +2,16 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import useMyClass from "../../../Hooks/useMyClass";
 
 
 const NavBar = () => {
+    const [,refetch]=useMyClass()
  const {user,logOut} =useContext(AuthContext)
  const handleLogout =()=>{
     logOut()
     .then(() => { 
+        refetch()
         Swal.fire({
             position: 'top-end',
             icon: 'success',
