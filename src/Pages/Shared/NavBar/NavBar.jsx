@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 
+
 const NavBar = () => {
  const {user,logOut} =useContext(AuthContext)
  const handleLogout =()=>{
@@ -14,7 +15,7 @@ const NavBar = () => {
             title: 'You sucessfully SignOut !!',
             showConfirmButton: false,
             timer: 1500
-          })
+        })
     })
     .catch(error => console.log(error));
  }

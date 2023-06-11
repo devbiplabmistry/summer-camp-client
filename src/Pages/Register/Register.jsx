@@ -5,42 +5,91 @@ import { useContext, useState } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 const Register = () => {
-    const navigate =useNavigate()
+    const navigate = useNavigate()
     const { signUp, updateUserProfile } = useContext(AuthContext);
-    const [cPass, setCPass] = useState("")
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        const { email, password, name, photo } = data;
-        if (data.password != data.confirmPassword) {
-            return setCPass('Your password is not match')
-        }
-        signUp(email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                console.log(user);
-                updateUserProfile(name, photo)
-                    .then((data) => {
-                        console.log(data);
-                        reset ()
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'You sucessfully registered !!!',
-                            showConfirmButton: false,
-                            timer: 1500
-                          })
-                    })
-                    .catch((error) => {
-                        console.log(error)
-                    })
+    // const onSubmit = data => {
+    //     const { email, password, name, photo } = data;
+    //     if (data.password != data.confirmPassword) {
+    //         return setCPass('Your password is not match')
+    //     }
+    //     signUp(email, password)
+    //         .then((userCredential) => {
+    //             const user = userCredential.user;
+    //             console.log(user);
+    //             updateUserProfile(name, photo)
+    //                 .then((data) => {
+    //                     console.log(data);
+    //                     const saveUser = { name: user?.displayName, email: data.email }
+    //                     fetch('http://localhost:5000/allUsers', {
+    //                         method: 'POST',
+    //                         headers: {
+    //                             'content-type': 'application/json'
+    //                         },
+    //                         body: JSON.stringify(saveUser)
+    //                     })
+    //                         .then(res => res.json())
+    //                         .then(data => {
+    //                             console.log(data);
+    //                             if (data) {
+    //                                 reset()
+    //                                 Swal.fire({
+    //                                     position: 'top-end',
+    //                                     icon: 'success',
+    //                                     title: 'User created successfully.',
+    //                                     showConfirmButton: true,
+    //                                     timer: 1500
+    //                                 })
+    //                                 // navigate('/');
+    //                             }
+    //                         })
 
+    //                         .catch((error) => {
+    //                             console.log(error)
+    //                         })
+
+    //                 })
+
+    //         });
+
+    // }
+    const onSubmit = data => {
+
+        signUp(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                updateUserProfile(data.name, data.photo)
+                    .then(() => {
+                        const saveUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/allUsers', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/');
+                                }
+                            })
+
+
+
+                    })
+                    .catch(error => console.log(error))
             })
-            .catch((error) => {
-                const errorMessage = error.message;
-                console.log(errorMessage);
-            });
-            navigate("/")
-    }
+    };
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -83,7 +132,7 @@ const Register = () => {
                                 <span className="label-text">Confirm Password</span>
                             </label>
                             <input type="Password" {...register("confirmPassword")} placeholder="Confirm password" className="input input-bordered" />
-                            <p className='text-red-400 text-base fon-[roboto]'><small>{cPass}</small></p>
+                          
                         </div>
                         <div className="form-control">
                             <label className="label">

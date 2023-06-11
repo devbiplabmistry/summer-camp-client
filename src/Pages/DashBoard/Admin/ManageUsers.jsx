@@ -1,9 +1,16 @@
+import axios from 'axios';
 import React from 'react';
+import { useQuery } from 'react-query';
 
 const ManageUsers = () => {
+    const { data: users = [], refetch } = useQuery(['users'], async () => {
+        const res = await axios.get('/users')
+        return res.data;
+    })
+
     return (
         <div>
-            <h3>this is manage users page</h3>
+            
         </div>
     );
 };

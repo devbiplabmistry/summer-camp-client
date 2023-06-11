@@ -5,6 +5,8 @@ import useMyClass from '../Hooks/useMyClass';
 
 const AddClassCard = ({ item, admin }) => {
     const [isDisabled, setIsdisabled] = useState(false)
+    const [feedback,setFeedBack]=useState("")
+    console.log(feedback);
     const [, refetch] = useMyClass()
     const handleApproved = (id) => {
         event.target.disabled = true;
@@ -32,7 +34,6 @@ const AddClassCard = ({ item, admin }) => {
             })
     }
     const handleDeny = (id) => {
-        // const [isDisabled, setIsdisabled] = useState(false)
         event.target.disabled = true;
         {
         if(event.target.disabled==true){
@@ -57,8 +58,6 @@ const AddClassCard = ({ item, admin }) => {
                 }
             })
     }
-
-
     return (
         <div>
             <div className="card w-96 bg-base-100 shadow-xl image-full">
@@ -76,12 +75,12 @@ const AddClassCard = ({ item, admin }) => {
                             <div className='flex  gap-4'>
                                 <button onClick={() => handleApproved(item._id)} className="btn btn-secondary  btn-sm " disabled={isDisabled}>Approved</button>
                                 <button onClick={()=>handleDeny(item._id)} className="btn btn-secondary  btn-sm "  >Deny</button>
-                                <button className="btn btn-secondary  btn-sm "  >Feedback</button>
+                                <button className="btn btn-secondary  btn-sm "   >Feedback</button>
                             </div>
                             :
                             <>
                                 <button className="btn btn-secondary  btn-sm ">update</button>
-                                <button className="btn btn-secondary  btn-sm " disabled>Feedback</button>
+                                <button  className="btn btn-secondary  btn-sm ">Feedback</button>
                             </>
                         }
                     </div>
