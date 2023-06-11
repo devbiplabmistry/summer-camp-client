@@ -2,28 +2,36 @@ import { Link, Outlet } from "react-router-dom";
 import Footer from "../Pages/Shared/Footer/Footer";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
+import useAdmin from "../Hooks/useAdmin";
+import useInstruct from "../Hooks/useInstruct";
+import useStudent from "../Hooks/useStudent";
+
 
 const DashBoard = () => {
     const { user } = useContext(AuthContext)
-    const isStudent = false;
-    const isInstructor = true;
-    const isAdmin = false;
-
+    // console.log(user);
+//   const isStudent=false
+    const isStudent =useStudent()
+    // console.log(isStudent[0].student);
+    const isAdmin =useAdmin()
+    // console.log(isAdmin[0].admin);
+    const isInstructor =useInstruct()
+    // console.log(isInstructor.Instructor);
     const menu =
         <>
-            {isStudent &&
+            {isStudent[0].student ==true  &&
                 <div className="flex ">
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/selectedClasses">My Selected Classes</Link></li>
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Enrolled Classes</Link></li>
                 </div>
             }
-            {isInstructor &&
+            {isInstructor.Instructor==true &&
                 <div className="flex ">
                     <li className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/dashboard/addaclass" >Add a Class</Link></li>
                     <li className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/dashboard/myClass">My Classes</Link></li>
                 </div>
             }
-            {isAdmin &&
+            {isAdmin[0].admin==true  &&
                 <div className="flex ">
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/manageClasses">Manage Classes</Link></li>
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/manageUsers">Manage Users</Link></li>
