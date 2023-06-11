@@ -4,49 +4,85 @@ import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const AddClass = () => {
-    const token =import.meta.env.VITE_IMAGE_UPLOAD_TOKEN
-    const image_hosting_url=`https://api.imgbb.com/1/upload?key=${token}`
+    const token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN
+    const image_hosting_url = `https://api.imgbb.com/1/upload?key=${token}`
     const { user } = useContext(AuthContext)
     const { register, handleSubmit } = useForm();
     const onSubmit = data => {
         const formData = new FormData();
         formData.append("image", data.image[0])
-        fetch(image_hosting_url,{
+        fetch(image_hosting_url, {
             method: "POST",
             body: formData,
         })
-        .then(res=>res.json())
-        .then(imageResponse=>{
-            const {className,instructorName,instructorEmail,availableSeats,price}=data;
-            const newClass ={className,instructorName,instructorEmail,availableSeats,price:parseFloat(price),image:imageResponse.data.display_url}
-            fetch('http://localhost:5000/instructor/addClass',{
-                method:'POST',
-                headers:{
-                    "Content-Type": "application/json",
-                },
-                body:JSON.stringify(newClass)})
-                .then(res=>res.json())
-                .then(data=>{
-                    console.log(data);
-                    if(data.insertedId){
+            .then(res => res.json())
+            .then(imageResponse => {
+                console.log( imageResponse.data.display_url);
+                // const { className: data.className, instructorName: data.instructorName, instructorEmail: data.instructorEmail, availableSeats: data.availableSeats, totalEnroll:0, status:"pending", price: data.price } = data;
+
+                const newClass = { className: data.className,
+                     instructorName:data.instructorName, 
+                     instructorEmail: data.instructorEmail, 
+                     availableSeats: data.availableSeats, 
+                     totalEnroll: 0,
+                      status: "pending",
+                       price: data.price,
+                        image: imageResponse.data.display_url,
+                        email:user?.email
+                     }
+                     console.log(newClass);
+                // const newClass ={className,instructorName,instructorEmail,availableSeats,price:parseFloat(price),image:imageResponse.data.display_url}
+                fetch('http://localhost:5000/instructor/addClass/', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(newClass)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    // console.log(data);
+                    if (data.insertedId) {
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
                             title: 'sucessfully added classes',
                             showConfirmButton: false,
                             timer: 1500
-                          })
+                        })
                     }
                 })
-           
-        })
+
+            })
+         
+        // const addClass = {
+        //     className: data.className,
+        //     instructorName: data.instructorName,
+        //     instructorEmail: data.instructorEmail,
+        //     price: data.price,
+        //     availableSeats: data.availableSeats,
+        //     image: data.image,
+        //     totalEnroll: 0,
+        //     status: "pending",   
+        // }
+        // // console.log(data.image)
+        // fetch('http://localhost:5000/instructor/addClass',{
+        //     method:'POST',
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //       },
+        //       body:JSON.stringify(addClass)
+        // })
+
     };
+
+
     return (
         <div>
             <div className=" bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
-                        <form onSubmit={ handleSubmit(onSubmit)} className="card-body">
+                        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className="form-control ">
                                 <label className="label">
                                     <span className="label-text">Class Name</span>
