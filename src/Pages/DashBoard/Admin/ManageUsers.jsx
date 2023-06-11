@@ -15,7 +15,7 @@ const ManageUsers = () => {
         }
     })
     const handleAdmin = (item) => {
-        fetch(`http://localhost:5000/allUsers/${item._id}`, {
+        fetch(`http://localhost:5000/allUsers/admin/${item._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())

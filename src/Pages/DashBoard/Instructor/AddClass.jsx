@@ -4,42 +4,43 @@ import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const AddClass = () => {
-    const {user} =useContext(AuthContext)
-    const { register, handleSubmit} = useForm();
+    const token =import.meta.env.VITE_IMAGE_UPLOAD_TOKEN
+    const image_hosting_url=`https://api.imgbb.com/1/upload?key=${token}`
+    const { user } = useContext(AuthContext)
+    const { register, handleSubmit } = useForm();
     const onSubmit = data => {
-        const addClass ={
-            className:data.className,
-            instructorName:data.instructorName,
-            instructorEmail:data.instructorEmail,
-            price:data.price,
-            availableSeats:data.availableSeats,
-            image:data.image,
-            totalEnroll :0,
-            status:"pending"
-        }
-        fetch('http://localhost:5000/instructor/addClass',{
-            method:'POST',
-            headers: {
-                "Content-Type": "application/json",
-              },
-              body:JSON.stringify(addClass)
+        const formData = new FormData();
+        formData.append("image", data.image[0])
+        fetch(image_hosting_url,{
+            method: "POST",
+            body: formData,
         })
         .then(res=>res.json())
-        .then(data=>{
-            // console.log(data);
-            if(data.insertedId){
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'sucessfully added classes',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-            }
+        .then(imageResponse=>{
+            const {className,instructorName,instructorEmail,availableSeats,price}=data;
+            const newClass ={className,instructorName,instructorEmail,availableSeats,price:parseFloat(price),image:imageResponse.data.display_url}
+            fetch('http://localhost:5000/instructor/addClass',{
+                method:'POST',
+                headers:{
+                    "Content-Type": "application/json",
+                },
+                body:JSON.stringify(newClass)})
+                .then(res=>res.json())
+                .then(data=>{
+                    console.log(data);
+                    if(data.insertedId){
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'sucessfully added classes',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+                    }
+                })
+           
         })
     };
-
-
     return (
         <div>
             <div className=" bg-base-200">
