@@ -6,8 +6,8 @@ import { AuthContext } from "../Providers/AuthProvider";
 const DashBoard = () => {
     const { user } = useContext(AuthContext)
     const isStudent = false;
-    const isInstructor = true;
-    const isAdmin = false;
+    const isInstructor = false;
+    const isAdmin = true;
 
     const menu =
         <>
