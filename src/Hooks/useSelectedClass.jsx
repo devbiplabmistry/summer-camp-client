@@ -6,11 +6,11 @@ import { useQuery} from "react-query";
 const useSelectedClass = () => {
 const {user,loading} =useContext(AuthContext)
     const [axiosSecure] = useAxiosSecure();
-    const {data: selectClasses=[], isLoading,refetch} = useQuery({
+    const {data: selectClasses=[], refetch} = useQuery({
         queryKey: ['selectedClass'],
         enabled:!loading,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/selectedClasses/?email=${user.email}`);
+            const res = await axiosSecure.get(`/selectedClasses/student?email=${user.email}`);
             return res.data;
         }
     })

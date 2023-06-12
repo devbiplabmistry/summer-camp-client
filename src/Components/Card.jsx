@@ -10,8 +10,8 @@ const Card = ({ item, }) => {
         if (!user) {
             alert('Please login before join the course !!')
         }
-        const { image, title, availableSeats, instructor, _id, description } = item;
-        const selectedClass = { selectedClassId: _id, email: user.email, image, title, availableSeats, instructor, description }
+        const { image, title, availableSeats, instructor, _id, description,price } = item;
+        const selectedClass = { selectedClassId: _id,price, email: user.email, image, title, availableSeats, instructor, description }
         fetch(`http://localhost:5000/selectedClasses/${_id}`, {
             method: 'POST',
             headers: {

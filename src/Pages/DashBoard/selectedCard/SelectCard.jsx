@@ -1,26 +1,25 @@
 import Swal from "sweetalert2";
-import useSelectedClass from "../../../Hooks/useSelectedClass";
+import { Link } from "react-router-dom";
 
 const SelectCard = (item) => {
-    const [,refetch] =useSelectedClass()
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/selectedClasses/${id}`,{
-            method:'DELETE'
+        fetch(`http://localhost:5000/selectedClasses/${id}`, {
+            method: 'DELETE'
         })
-        .then(res=>res.json())
-        .then(data=>{
-            if(data.deletedCount >0){
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: `${item.item.title} has been deleted sucessfully !!`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-            }
-            refetch()
-        })
-    
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: `${item.item.title} has been deleted sucessfully !!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                refetch()
+            })
+
     }
     return (
         <div>
@@ -32,8 +31,10 @@ const SelectCard = (item) => {
                         <p className="font-[roboto] font-semibold text-white text-base my-4">{item.item.description}</p>
                         <p className="font-[roboto] font-semibold text-white text-base my-4">instructor {item.item.instructor}</p>
                         <p className="font-[roboto] font-semibold text-white text-base my-4">seat left :{item.item.availableSeats}</p>
+                        <p className="font-[roboto] font-semibold text-white text-base my-4">price :{item.item.price}</p>
                         <button onClick={() => handleDelete(item.item._id)} className="btn btn-outline btn-secondary mr-5">DELETE</button>
-                        <button className="btn btn-outline btn-secondary">PAY NOW</button>
+                        <Link to={ "/dashboard/payments"}>
+                             <button className="btn btn-outline btn-secondary">PAY NOW</button></Link>
                     </div>
                 </div>
             </div>

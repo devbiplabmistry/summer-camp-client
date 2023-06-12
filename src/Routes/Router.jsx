@@ -12,6 +12,7 @@ import MyClasses from "../Pages/DashBoard/Instructor/MyClasses";
 import ManageClass from "../Pages/DashBoard/Admin/ManageClass";
 import ManageUsers from "../Pages/DashBoard/Admin/ManageUsers";
 import FeedBack from "../Pages/DashBoard/FeedBack/FeedBack";
+import Payments from "../Pages/DashBoard/Payments/Payments";
 
 
 
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/feedback",
                 element: <FeedBack></FeedBack>
+            },
+            {
+                path: "/dashboard/payments",
+                element: <Payments></Payments>
             },
         ]
     }

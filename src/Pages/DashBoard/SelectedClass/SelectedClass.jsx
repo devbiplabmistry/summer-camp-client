@@ -1,9 +1,10 @@
-import React from 'react';
+
 import useSelectedClass from '../../../Hooks/useSelectedClass';
 import SelectCard from '../selectedCard/SelectCard';
 
 const SelectedClass = () => {
     const selectClass = useSelectedClass();
+    // console.log(selectClass);
     return (
         <div className='grid grid-cols-3 gap-3'>
             {

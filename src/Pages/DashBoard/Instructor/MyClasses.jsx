@@ -4,7 +4,7 @@ import useMyClass from "../../../Hooks/useMyClass";
 
 const MyClasses = () => {
     const [addClass] = useMyClass()
-    console.log(addClass);
+    // console.log(addClass);
 
     return (
         <>
