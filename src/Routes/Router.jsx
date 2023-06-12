@@ -14,6 +14,7 @@ import ManageUsers from "../Pages/DashBoard/Admin/ManageUsers";
 import FeedBack from "../Pages/DashBoard/FeedBack/FeedBack";
 
 
+
 const router = createBrowserRouter([
     {
         path: "/",
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
             {
                 path: "/dashboard/feedback",
                 element: <FeedBack></FeedBack>
-            }
+            },
         ]
     }
 ]);

@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
 import useMyClass from '../Hooks/useMyClass';
 import { Link } from 'react-router-dom';
@@ -13,9 +13,9 @@ const AddClassCard = ({ item, admin }) => {
     const handleApproved = (id) => {
         event.target.disabled = true;
         {
-        if(event.target.disabled==true){
-            setIsdisabled(true)
-        }
+            if (event.target.disabled == true) {
+                setIsdisabled(true)
+            }
         }
         // console.log(id);
         fetch(`http://localhost:5000/instructor/addClass/${id}`, {
@@ -32,25 +32,25 @@ const AddClassCard = ({ item, admin }) => {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                  
+
                 }
             })
     }
     const handleDeny = (id) => {
         event.target.disabled = true;
         {
-        if(event.target.disabled==true){
-            setIsdisabled(true)
-        }
+            if (event.target.disabled == true) {
+                setIsdisabled(true)
+            }
         }
         // console.log(id);
         fetch(`http://localhost:5000/instructor/addClass/deny/${id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
-            .then(data => {       
+            .then(data => {
                 if (data.modifiedCount) {
-                    refetch()   
+                    refetch()
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -61,6 +61,39 @@ const AddClassCard = ({ item, admin }) => {
                 }
             })
     }
+
+    // 
+    const handleFeedBack = (id) => {
+        const text = prompt("write something")
+        const newFeedback ={
+            feedback:text,
+            feedbackId:id
+        }
+        fetch(`http://localhost:5000/feedback/${id}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newFeedback), 
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+            });
+        };
+        // update feedback
+
+        const handleUpdateFeedBack =(id)=>{
+            fetch(`http://localhost:5000/feedback/${id}`, {
+                method: 'GET',
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                    const updateFeedBack =data.feedback;
+                alert(updateFeedBack)
+                });
+            };
+
     return (
         <div>
             <div className="card w-96 bg-base-100 shadow-xl image-full">
@@ -77,13 +110,13 @@ const AddClassCard = ({ item, admin }) => {
                         {admin ?
                             <div className='flex  gap-4'>
                                 <button onClick={() => handleApproved(item._id)} className="btn btn-secondary  btn-sm " disabled={isDisabled}>Approved</button>
-                                <button onClick={()=>handleDeny(item._id)} className="btn btn-secondary  btn-sm "  >Deny</button>
-                              <Link to="/dashboard/feedback"><button  className="btn btn-secondary  btn-sm ">Feedback</button></Link>
+                                <button onClick={() => handleDeny(item._id)} className="btn btn-secondary  btn-sm "  >Deny</button>
+                                <Link><button onClick={() => handleFeedBack(item._id)} className="btn btn-secondary  btn-sm ">Feedback</button></Link>
                             </div>
                             :
                             <>
                                 <button className="btn btn-secondary  btn-sm ">update</button>
-                                <button  className="btn btn-secondary  btn-sm ">Feedback</button>
+                                <button onClick={()=>handleUpdateFeedBack(item._id)} className="btn btn-secondary  btn-sm ">Feedback</button>
                             </>
                         }
                     </div>
