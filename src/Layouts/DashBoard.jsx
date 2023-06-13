@@ -20,13 +20,13 @@ const DashBoard = () => {
     // console.log(isInstructor.Instructor);
     const menu =
         <>
-            {isStudent[0].student ==true || isStudent[0].student ==false   &&
+            { isInstructor.Instructor !==true && isAdmin[0].admin !==true     &&
                 <div className="flex ">
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/selectedClasses">My Selected Classes</Link></li>
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Enrolled Classes</Link></li>
                 </div>
             }
-            {isInstructor.Instructor==true &&
+            {isInstructor.Instructor==true   &&
                 <div className="flex ">
                     <li className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/dashboard/addaclass" >Add a Class</Link></li>
                     <li className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/dashboard/myClass">My Classes</Link></li>

@@ -34,7 +34,7 @@ const Card = ({ item, }) => {
             })
     }
     return (
-        <>
+        <div className="mx-auto">
             {
                 availableSeats > 0 ? <div className="card w-96 bg-base-100 shadow-xl image-full">
                     <figure className="w-[400px] h-[400px]"><img src={image} alt="Shoes" /></figure>
@@ -66,7 +66,7 @@ const Card = ({ item, }) => {
 
                     </div >
             }
-        </>
+        </div>
     );
 };
 
