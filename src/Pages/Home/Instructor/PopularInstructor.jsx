@@ -7,7 +7,7 @@ const PopularInstructor = () => {
     return (
         <div>
             <h1 className="font-[roboto] font-bold text-orange-600 uppercase text-2xl text-center mt-24 mb-4">this is our popular instructor</h1>
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid sm:grid-cols-1  lg:grid-cols-2 xl:grid-cols-3 gap-4">
                 {
                     popular.map(item => <div key={item._id} className="card w-96 bg-base-100 shadow-xl mx-auto">
                         <figure className="px-10 pt-10">

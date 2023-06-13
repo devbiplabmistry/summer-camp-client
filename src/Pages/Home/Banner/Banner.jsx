@@ -50,7 +50,7 @@ const Banner = () => {
             <div>
                 <img src={banner6} />
                 <div className="absolute top-1/2 left-1/4">
-                    <h1 className="text-white font-[roboto] sm:text-lg md:text-7xl font-bold mb-4 ">The Beat's Guide: Hip-Hop and Street Dance Essentials</h1>
+                    <h1 className="text-white font-[roboto] sm:text-lg md:text-lg xl:text-7xl font-bold mb-4 ">The Beat's Guide: Hip-Hop and Street Dance Essentials</h1>
                     <p className="font-[roboto] md:text-lg sm:text-sm text-white">Master Urban Dance Moves and Command the Stage</p>
                 </div>
             </div>
