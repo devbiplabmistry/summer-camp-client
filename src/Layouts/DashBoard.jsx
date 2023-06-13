@@ -9,7 +9,6 @@ import useStudent from "../Hooks/useStudent";
 
 
 const DashBoard = () => {
-   
     const { user } = useContext(AuthContext)
     // console.log(user);
 //   const isStudent=false
@@ -21,7 +20,7 @@ const DashBoard = () => {
     // console.log(isInstructor.Instructor);
     const menu =
         <>
-            {isStudent[0].student ==true  &&
+            {isStudent[0].student ==true || isStudent[0].student ==false   &&
                 <div className="flex ">
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/selectedClasses">My Selected Classes</Link></li>
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Enrolled Classes</Link></li>
