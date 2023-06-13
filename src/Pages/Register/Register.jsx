@@ -6,7 +6,7 @@ import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 const Register = () => {
     const navigate = useNavigate()
-    const { signUp, updateUserProfile } = useContext(AuthContext);
+    const { signUp, updateUserProfile, googleSignUp } = useContext(AuthContext);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     // const onSubmit = data => {
     //     const { email, password, name, photo } = data;
@@ -61,7 +61,7 @@ const Register = () => {
                 console.log(loggedUser);
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
-                        const saveUser = { name: data.name, email: data.email,photo:data.photo,role:"student" }
+                        const saveUser = { name: data.name, email: data.email, photo: data.photo, role: "student" }
                         fetch('http://localhost:5000/allUsers', {
                             method: 'POST',
                             headers: {
@@ -90,6 +90,21 @@ const Register = () => {
                     .catch(error => console.log(error))
             })
     };
+
+    const handleGoogleLogin = () => {
+        googleSignUp()
+        .then((result) => {
+            const user = result.user;
+          if(user){
+            navigate("/")
+          }
+          }).catch((error) => {
+            const errorMessage = error.message;
+            console.log(errorMessage);
+          });
+    }
+
+
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -132,7 +147,7 @@ const Register = () => {
                                 <span className="label-text">Confirm Password</span>
                             </label>
                             <input type="Password" {...register("confirmPassword")} placeholder="Confirm password" className="input input-bordered" />
-                          
+
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -147,7 +162,7 @@ const Register = () => {
                         <p className='font-[roboto] text-lg'><small>Are you Already register ? <Link to="/login">Please Login now !!</Link></small></p>
                         <div className="divider">OR</div>
                         <div className='mx-auto font-bold text-3xl'>
-                            <BsGoogle></BsGoogle>
+                            <BsGoogle onClick={handleGoogleLogin}></BsGoogle>
                         </div>
                     </form>
                 </div>

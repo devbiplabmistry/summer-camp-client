@@ -1,28 +1,25 @@
 import { CardElement, useCartElementState, useStripe } from "@stripe/react-stripe-js"
 import { useEffect, useState } from "react";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+
 
 
 const CheckoutForm = ({ price }) => {
   const stripe = useStripe();
   const elements = useCartElementState();
-  const [clientSecret, setClientSecret] = useState("");
-  const [axiosSecure] = useAxiosSecure()
-  const [processing,setProcessing]=useState(false)
-  useEffect(() => {
-    // fetch("http://localhost:5000/create-payment-intent", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({price}),
-    // })
-    console.log(price);
-    axiosSecure.post('/create-payment-intent',{price})
-      .then(data => {
-        console.log(data.clientSecret);
-        setClientSecret(data.clientSecret)
-      })
-  }, []);
+  const [clientSecret, setClientSecret] = useState();
+  // const [processing, setProcessing] = useState(false)
 
+  useEffect(() => {
+    fetch("http://localhost:5000/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ price }),
+    })
+      .then(res => res.json())
+      
+      .then(data => setClientSecret(data.clientSecret))
+    }, [price])
+  console.log(clientSecret);
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!stripe || !elements) {
@@ -39,11 +36,9 @@ const CheckoutForm = ({ price }) => {
     if (error) {
       console.log('error', error);
     }
-    else {
       console.log('PaymentMethod', paymentMethod);
-    }
+    
 
-setProcessing(true)
     const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
       clientSecret,
       {
@@ -54,9 +49,7 @@ setProcessing(true)
           },
         },
       },
-    );
-setProcessing(false)
-
+    ); 
     if (confirmError) {
       console.log(confirmError);
     }
@@ -82,11 +75,11 @@ setProcessing(false)
           },
         }}
       />
-      <button type="submit" className="p-4 bg-green-600 rounded-lg btn-outline" disabled={!stripe || !clientSecret || processing}>
-        <h4 className="text-white uppercase mx-auto text-center">pay</h4>
+     <button type="submit" disabled={!stripe}>
+        Pay
       </button>
     </form>
   );
-};
+}
 
 export default CheckoutForm;

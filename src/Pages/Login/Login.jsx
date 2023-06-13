@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 const Login = () => {
-    const { signIn,user } = useContext(AuthContext)
+    const { signIn,user,googleSignUp } = useContext(AuthContext)
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPass, setShowPass] = useState(false)
     const navigate =useNavigate()
@@ -33,6 +33,21 @@ const Login = () => {
                 console.log(errorMessage);
             });
     };
+ 
+    const handleGoogleLogin = () => {
+        googleSignUp()
+        .then((result) => {
+            const user = result.user;
+          if(user){
+            navigate("/")
+          }
+          }).catch((error) => {
+            const errorMessage = error.message;
+            console.log(errorMessage);
+          });
+    }
+
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col">
@@ -64,7 +79,7 @@ const Login = () => {
                         <p className='font-[roboto] text-lg'><small>Are you new Here ? <Link to="/register">Please Register</Link></small></p>
                         <div className="divider">OR</div>
                         <div className='mx-auto font-bold text-3xl'>
-                            <BsGoogle></BsGoogle>
+                            <BsGoogle onSubmit={handleGoogleLogin}></BsGoogle>
                         </div>
                     </form>
                 </div>
