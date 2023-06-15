@@ -17,25 +17,29 @@ const DashBoard = () => {
     const isAdmin =useAdmin()
     // console.log(isAdmin[0].admin);
     const isInstructor =useInstruct()
-    // console.log(isInstructor.Instructor);
+    // console.log(isInstructor[0]);
     const menu =
         <>
-            { isInstructor.Instructor !==true && isAdmin[0].admin !==true     &&
+            { isInstructor[0].Instructor !==true && isAdmin[0].admin !==true  &&
                 <div className="flex ">
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/selectedClasses">My Selected Classes</Link></li>
-                    <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link>My Enrolled Classes</Link></li>
+                    <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/enrollClass">My Enrolled Classes</Link></li>
+                    <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/paymentHistory">Payment History</Link></li>
+                    <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/"> Home</Link></li>
                 </div>
             }
-            {isInstructor.Instructor==true   &&
+            {isInstructor[0].Instructor==true   &&
                 <div className="flex ">
                     <li className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/dashboard/addaclass" >Add a Class</Link></li>
                     <li className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/dashboard/myClass">My Classes</Link></li>
+                    <li className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/">Home</Link></li>
                 </div>
             }
             {isAdmin[0].admin==true  &&
                 <div className="flex ">
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/manageClasses">Manage Classes</Link></li>
                     <li className="font-[roboto] font-semibold text-lg text-orange-500"><Link to="/dashboard/manageUsers">Manage Users</Link></li>
+                    <li className="font-[roboto] font-semibold text-lg text-orange-500 uppercase"><Link to="/">Home</Link></li>
                 </div>
             }
         </>

@@ -7,7 +7,7 @@ const AddClass = () => {
     const token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN
     const image_hosting_url = `https://api.imgbb.com/1/upload?key=${token}`
     const { user } = useContext(AuthContext)
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit,reset } = useForm();
     const onSubmit = data => {
         const formData = new FormData();
         formData.append("image", data.image[0])
@@ -32,7 +32,7 @@ const AddClass = () => {
                      }
                      console.log(newClass);
                 // const newClass ={className,instructorName,instructorEmail,availableSeats,price:parseFloat(price),image:imageResponse.data.display_url}
-                fetch('http://localhost:5000/instructor/addClass/', {
+                fetch('https://summer-school-server-psi.vercel.app/instructor/addClass/', {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
@@ -43,6 +43,7 @@ const AddClass = () => {
                 .then(data => {
                     // console.log(data);
                     if (data.insertedId) {
+                        reset ()
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -55,24 +56,7 @@ const AddClass = () => {
 
             })
          
-        // const addClass = {
-        //     className: data.className,
-        //     instructorName: data.instructorName,
-        //     instructorEmail: data.instructorEmail,
-        //     price: data.price,
-        //     availableSeats: data.availableSeats,
-        //     image: data.image,
-        //     totalEnroll: 0,
-        //     status: "pending",   
-        // }
-        // // console.log(data.image)
-        // fetch('http://localhost:5000/instructor/addClass',{
-        //     method:'POST',
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //       },
-        //       body:JSON.stringify(addClass)
-        // })
+
 
     };
 

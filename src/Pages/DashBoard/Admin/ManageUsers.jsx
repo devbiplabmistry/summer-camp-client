@@ -10,12 +10,12 @@ const ManageUsers = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users', user?.email],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/allUsers')
+            const res = await axios.get('https://summer-school-server-psi.vercel.app/allUsers')
             return res.data
         }
     })
     const handleAdmin = (item) => {
-        fetch(`http://localhost:5000/allUsers/admin/${item._id}`, {
+        fetch(`https://summer-school-server-psi.vercel.app/allUsers/admin/${item._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -35,7 +35,7 @@ const ManageUsers = () => {
             })
     }
     const handleMakeInstructor = (item) => {
-        fetch(`http://localhost:5000/allUsers/instructor/${item._id}`, {
+        fetch(`https://summer-school-server-psi.vercel.app/allUsers/instructor/${item._id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())

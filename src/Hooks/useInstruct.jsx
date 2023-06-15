@@ -5,15 +5,15 @@ import axios from 'axios';
 
 const useInstruct = () => {
     const {user} = useContext(AuthContext);
-    const { data: Instructor = [], } = useQuery({
+    const { data: Instructor = [],isLoading:isInstructorLoading } = useQuery({
         queryKey: ['Instructor', user?.email],
         queryFn: async () => {
-            const res = await axios(`http://localhost:5000/allUsers/instructor/${user?.email}`)
+            const res = await axios(`https://summer-school-server-psi.vercel.app/allUsers/instructor/${user?.email}`)
             return res.data;
         }
 
     })
-       return Instructor   
+       return [Instructor ,isInstructorLoading]  
 };
 
 export default useInstruct;

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SelectCard = (item) => {
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/selectedClasses/${id}`, {
+        fetch(`https://summer-school-server-psi.vercel.app/selectedClasses/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -33,7 +33,7 @@ const SelectCard = (item) => {
                         <p className="font-[roboto] font-semibold text-white text-base my-4">seat left :{item.item.availableSeats}</p>
                         <p className="font-[roboto] font-semibold text-white text-base my-4">price :{item.item.price}</p>
                         <button onClick={() => handleDelete(item.item._id)} className="btn btn-outline btn-secondary mr-5">DELETE</button>
-                        <Link to={ "/dashboard/payments"}>
+                        <Link to={`/dashboard/payments/${item.item._id}`}>
                              <button className="btn btn-outline btn-secondary">PAY NOW</button></Link>
                     </div>
                 </div>

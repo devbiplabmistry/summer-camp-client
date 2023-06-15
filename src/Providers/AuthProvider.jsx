@@ -9,7 +9,6 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
     const provider = new GoogleAuthProvider();
-
     const signUp = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password);
@@ -32,7 +31,7 @@ const AuthProvider = ({ children }) => {
     }
     const unsubscribe = onAuthStateChanged(auth, (user) => {
         if (user) {
-            fetch('http://localhost:5000/jwt',{
+            fetch('https://summer-school-server-psi.vercel.app/jwt',{
                 method:'POST'
             })
             .then(res=>res.json())

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import useMyClass from "../../../Hooks/useMyClass";
+import {FiArrowRightCircle} from "react-icons/fi";
 
 
 const NavBar = () => {
@@ -26,7 +27,6 @@ const NavBar = () => {
         <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/">Home</Link> </li>
         <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/instructor">instructor</Link> </li>
         <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/classes">classes</Link> </li>
-        <button onClick={handleLogout} className="btn btn-secondary">logOut</button>
        {user &&  <li className="font-[roboto] font-bold text-black text-xl "> <Link to="/dashboard">Dashboard </Link> </li>}
     </>
 
@@ -50,7 +50,7 @@ const NavBar = () => {
             </div>
             <div className="navbar-end">
              {
-                user ? <Link to="/login"><img className="w-10 h-10 rounded-full" src={user.photoURL} alt="photo" /> </Link> : <Link to="/login" className="btn">Login</Link>
+                user ?<> <Link to="/login"><img className="w-10 h-10 rounded-full mr-1" src={user.photoURL} alt="photo" /> </Link> <> <FiArrowRightCircle className="text-3xl" onClick={handleLogout}></FiArrowRightCircle ></> </>: <Link to="/login" className="btn">Login</Link>
              }
             </div>
         </div>

@@ -18,7 +18,7 @@ const AddClassCard = ({ item, admin }) => {
             }
         }
         // console.log(id);
-        fetch(`http://localhost:5000/instructor/addClass/${id}`, {
+        fetch(`https://summer-school-server-psi.vercel.app/instructor/addClass/${id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -44,7 +44,7 @@ const AddClassCard = ({ item, admin }) => {
             }
         }
         // console.log(id);
-        fetch(`http://localhost:5000/instructor/addClass/deny/${id}`, {
+        fetch(`https://summer-school-server-psi.vercel.app/instructor/addClass/deny/${id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -69,7 +69,7 @@ const AddClassCard = ({ item, admin }) => {
             feedback:text,
             feedbackId:id
         }
-        fetch(`http://localhost:5000/feedback/${id}`, {
+        fetch(`https://summer-school-server-psi.vercel.app/feedback/${id}`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const AddClassCard = ({ item, admin }) => {
         // update feedback
 
         const handleUpdateFeedBack =(id)=>{
-            fetch(`http://localhost:5000/feedback/${id}`, {
+            fetch(`https://summer-school-server-psi.vercel.app/feedback/${id}`, {
                 method: 'GET',
               })
                 .then((res) => res.json())

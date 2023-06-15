@@ -12,7 +12,7 @@ const Card = ({ item, }) => {
         }
         const { image, title, availableSeats, instructor, _id, description,price } = item;
         const selectedClass = { selectedClassId: _id,price, email: user.email, image, title, availableSeats, instructor, description }
-        fetch(`http://localhost:5000/selectedClasses/${_id}`, {
+        fetch(`https://summer-school-server-psi.vercel.app/selectedClasses/${_id}`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

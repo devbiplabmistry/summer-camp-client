@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const useAxiosSecure = () => {
   const navigate = useNavigate(); 
   const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000', 
+    baseURL: 'https://summer-school-server-psi.vercel.app', 
   });
 
   useEffect(() => {

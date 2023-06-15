@@ -8,7 +8,7 @@ const useMyClass = () => {
     const { data: addClass = [], refetch } = useQuery({
         queryKey: ['addClass'],
         queryFn: async () => {
-            const res = await axios(`http://localhost:5000/instructor/addClass/${user?.email}`)
+            const res = await axios(`https://summer-school-server-psi.vercel.app/instructor/addClass/${user?.email}`)
             return res.data;
         }
 

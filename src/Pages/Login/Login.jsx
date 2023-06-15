@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 import { BsGoogle } from 'react-icons/bs';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
@@ -9,7 +9,9 @@ const Login = () => {
     const { signIn,user,googleSignUp } = useContext(AuthContext)
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPass, setShowPass] = useState(false)
-    const navigate =useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     const onSubmit = data => {
         const { email, password } = data;
         signIn(email, password)
@@ -25,8 +27,8 @@ const Login = () => {
                         showConfirmButton: false,
                         timer: 1500
                       })
+                      navigate(from, { replace: true });
                 }
-                navigate("/")
             })
             .catch((error) => {
                 const errorMessage = error.message;

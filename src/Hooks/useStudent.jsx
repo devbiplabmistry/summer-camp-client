@@ -8,7 +8,7 @@ const useStudent = () => {
     const { data: student = []} = useQuery({
         queryKey: ['student', user?.email],
         queryFn: async () => {
-            const res = await axios(`http://localhost:5000/allUsers/student/${user?.email}`)
+            const res = await axios(`https://summer-school-server-psi.vercel.app/allUsers/student/${user?.email}`)
             return res.data;
         }
 

@@ -2,7 +2,7 @@ const FeedBack = () => {
     const handleFeedBack = (event) => {
       event.preventDefault();
       const feedback = event.target.elements.feedBack.value;
-      fetch('http://localhost:5000/feedback', {
+      fetch('https://summer-school-server-psi.vercel.app/feedback', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

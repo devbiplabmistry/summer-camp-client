@@ -13,6 +13,9 @@ import ManageClass from "../Pages/DashBoard/Admin/ManageClass";
 import ManageUsers from "../Pages/DashBoard/Admin/ManageUsers";
 import FeedBack from "../Pages/DashBoard/FeedBack/FeedBack";
 import Payments from "../Pages/DashBoard/Payments/Payments";
+import ErrorPage from "../Pages/404Page/ErrorPage";
+import PaymentHistory from "../Pages/DashBoard/Payments/PaymentHistrory/PaymentHistory";
+import EnrollClass from "../Pages/DashBoard/EnrollClass/EnrollClass";
 
 
 
@@ -62,7 +65,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashboard/manageClasses",
-                element:<ManageClass></ManageClass>
+                element: <ManageClass></ManageClass>
             },
             {
                 path: "/dashboard/manageUsers",
@@ -73,10 +76,22 @@ const router = createBrowserRouter([
                 element: <FeedBack></FeedBack>
             },
             {
-                path: "/dashboard/payments",
+                path: "/dashboard/payments/:id",
                 element: <Payments></Payments>
             },
+            {
+                path: "/dashboard/paymentHistory",
+                element: <PaymentHistory></PaymentHistory>
+            },
+            {
+                path: "/dashboard/enrollClass",
+                element: <EnrollClass></EnrollClass>
+            },
         ]
+    },
+    {
+        path: "*",
+        element: <ErrorPage></ErrorPage>
     }
 ]);
 export default router;

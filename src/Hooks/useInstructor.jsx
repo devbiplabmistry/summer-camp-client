@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
-const useInstructor =()=>{
-    const [instructor,setInstructor]=useState([]);
-    useEffect(()=>{
-        fetch('http://localhost:5000/instructor')
-        .then(res=>res.json())
-        .then(data=>setInstructor(data))
-    },[])
+const useInstructor = () => {
+    const [instructor, setInstructor] = useState([]);
+    useEffect(() => {
+        fetch('https://summer-school-server-psi.vercel.app/instructor')
+            .then(res => res.json())
+            .then(data => setInstructor(data))
+    }, [])
     return instructor;
 
 }
